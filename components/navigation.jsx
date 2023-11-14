@@ -13,7 +13,16 @@ export default function NavigationCustom() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="ListScreen" component={ListScreen} />
+                <Stack.Screen name="ListScreen" component={ListScreen} options={{
+                    title: 'List Article(s)',
+                    headerStyle: {
+                        backgroundColor: '#f4511e',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }} />
             </Stack.Navigator>
         </NavigationContainer>
 

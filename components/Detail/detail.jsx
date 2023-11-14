@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Dashboard from '../../layout/dashboard';
+import { mediumLinks } from '../../helper/urls';
 
 
 export default function ListScreen() {
@@ -31,15 +32,57 @@ export default function ListScreen() {
 
     return (
         <View style={{ flex: 1 }}>
-            <Button onPress={() => navigation.navigate('Home')} title='goto'> got o </Button>
+            {/* <Button onPress={() => navigation.navigate('Home')} title='goto'> got o </Button> */}
             <Dashboard>
-                {Array.from(Array(10).keys()).map(item => {
+                {mediumLinks.map((item,index) => {
                 
                 return(
-                    <Text> {item} </Text>
+                    <View key={index} style={{backgroundColor: "#f4521e", margin: 15,marginTop: 100, padding: 35,borderRadius: 30, height: 200}}>  
+                        
+      
+
+                                <View style={styles.container}>
+                    <View style={styles.column}>
+                    <Image source={require('./../../images/portfolio1.jpg')}
+                            style={{
+                                height: 100,
+                                width: 100,
+                                borderRadius: 50
+                            }} />
+
+                    </View>
+             
+                    <View style={styles.column}>
+                    <Text style={{fontFamily: "RobotoCondensed-Bold" , color: "white" , fontSize: 22, padding: 10}}>article-{index+1}</Text> 
+                        <Text style={{color: "white" , fontSize: 16, padding: 10}}>Posted: {index+1} day ago</Text> 
+
+
+                    </View>
+                </View>
+                    </View>
                 )
                 })}
             </Dashboard>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row', // This sets the layout to a row
+        justifyContent: 'space-between', // Adjust as needed (space-between, space-around, etc.)
+        paddingHorizontal: 16, // Optional: Add padding for spacing
+    },
+    column: {
+        flex: 1, // Each column takes up equal space
+        // justifyContent: "center",
+        // alignItems: "center",
+        // padding: 16, // Optional: Add padding for content spacing
+    },
+    column1: {
+        flex: 1, // Each column takes up equal space
+
+        padding: 16, // Optional: Add padding for content spacing
+        
+    },
+});

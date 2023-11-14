@@ -18,8 +18,8 @@ export default function HomeScreen() {
                         <Image source={require('./../../images/portfolio1.jpg')}
                             style={{
                                 flex: 1,
-                                width: 350,
-                                height: 350,
+                                width: 330,
+                                height: 450,
                                 resizeMode: 'contain'
                             }} />
                     </View>
@@ -29,7 +29,7 @@ export default function HomeScreen() {
 
                 </View>
 
-                <View style={styles.container}>
+                {/* <View style={styles.container}>
                     <View style={styles.column}>
                         <Image source={require('./../../images/portfolio2.jpg')}
                             style={{ width: 80 }} />
@@ -45,17 +45,18 @@ export default function HomeScreen() {
                             style={{ width: 80 }} />
 
                     </View>
-                </View>
+                </View> */}
 
 
                 <View style={{
                 display: "flex",
-                marginTop: 70
+                margin: 20
+                // marginTop: 260
             }}>
 
                 <Button
-                    title=" Go To Profile"
-                    color="#3efa"
+                    title="Proceed to article(s)"
+                    color="#f4511e"
                     onPress={() => navigation.navigate('ListScreen')} />
             </View>
 
