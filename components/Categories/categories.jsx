@@ -15,26 +15,26 @@ export default function ListCategories() {
     const [articles, setArticles] = useState([])
     const [search, setSearch] = useState("")
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     showLoader(true)
-    //     var requestOptions = {
-    //         method: 'GET',
-    //         redirect: 'follow'
-    //     };
+        showLoader(true)
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
 
-    //     fetch("http://192.168.0.104:3001/articles/all", requestOptions)
-    //         .then(response => response.json())
-    //         .then(result => setArticles(result))
-    //         .finally(showLoader(false)
-    //         )
-    //         .catch(error => console.log('error', error));
-
-
+        fetch("http://192.168.0.104:3001/articles/all", requestOptions)
+            .then(response => response.json())
+            .then(result => setArticles(result))
+            .finally(showLoader(false)
+            )
+            .catch(error => console.log('error', error));
 
 
 
-    // }, [])
+
+
+    }, [])
 
 
     const categories = [
@@ -52,10 +52,10 @@ export default function ListCategories() {
             name: 'Humor',
             imageSource: require("./../../images/poet.jpg")
         },
+        
         // more categories here
     ]
 
-    console.log("categories.filter(item => item.name.toLowerCase().includes(search))", categories.filter(item => item.name.toLowerCase().includes(search)))
 
 
 
@@ -70,6 +70,10 @@ export default function ListCategories() {
 
     };
 
+    const gotoProductsInCategory = (category) => {
+        navigation.navigate('ArticleInCategories',{ category })
+    }
+    
     return (
         <View style={styles.categories}>
 
@@ -90,14 +94,16 @@ export default function ListCategories() {
                             categories.filter(item => item.name.toLowerCase().includes(search)).map((item, i) => {
                                 return (
                                     <View key={i}>
-                                        <Card containerStyle={styles.card}>
+                                        <Card containerStyle={styles.card} >
 
                                             <Icon
                                                 raised
                                                 name='heartbeat'
                                                 type='font-awesome'
                                                 color='#f50'
-                                                onPress={() => console.log('hello')} />
+                                                
+                                                onPress={() => gotoProductsInCategory(item.name)}
+                                                />
                                             <Text style={styles.name}>{item.name}</Text>
                                         </Card>
                                     </View>
@@ -116,8 +122,9 @@ export default function ListCategories() {
 const styles = StyleSheet.create({
     container: {
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "left",
         alignItems: "center"
     },
 
@@ -130,14 +137,14 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: "#0f4d92",
         height: 150,
-        width: 250,
+        width: 150,
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center"
     },
     name: {
         color: "white",
-        fontSize: 33,
+        fontSize: 22,
         textAlign: "center"
     },
     noDataText: {

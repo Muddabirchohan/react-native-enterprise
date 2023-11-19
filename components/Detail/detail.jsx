@@ -21,22 +21,15 @@ export default function ListScreen() {
             redirect: 'follow'
         };
 
-        fetch("http://192.168.0.104:3001/articles/all", requestOptions)
+        fetch("http://192.168.0.105:3001/articles/all", requestOptions)
             .then(response => response.json())
             .then(result => setArticles(result))
-            .finally(showLoader(false)
-            )
             .catch(error => console.log('error', error));
-
-
-
-
 
     }, [])
 
 
 
-    console.log("art", articles[0])
 
     if (loader) return (
         <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
