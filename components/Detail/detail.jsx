@@ -10,18 +10,33 @@ export default function ListScreen() {
 
     const navigation = useNavigation()
 
-    const [loader, showLoader] = useState(true)
+    const [loader, showLoader] = useState(false)
+    const [articles, setArticles] = useState([])
 
     useEffect(() => {
 
-        const timeoutId = setTimeout(() => {
-            showLoader(!loader)
-        }, 1000)
+        showLoader(true)
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch("http://192.168.0.104:3001/articles/all", requestOptions)
+            .then(response => response.json())
+            .then(result => setArticles(result))
+            .finally(showLoader(false)
+            )
+            .catch(error => console.log('error', error));
 
 
-        return () => clearTimeout(timeoutId);
+
+
 
     }, [])
+
+
+
+    console.log("art", articles[0])
 
     if (loader) return (
         <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
@@ -34,33 +49,41 @@ export default function ListScreen() {
         <View style={{ flex: 1 }}>
             {/* <Button onPress={() => navigation.navigate('Home')} title='goto'> got o </Button> */}
             <Dashboard>
-                {mediumLinks.map((item,index) => {
-                
-                return(
-                    <View key={index} style={{backgroundColor: "#f4521e", margin: 15,marginTop: 100, padding: 35,borderRadius: 30, height: 200}}>  
-                        
-      
+                {articles && articles.length > 0 && articles?.map((item, index) => {
 
-                                <View style={styles.container}>
-                    <View style={styles.column}>
-                    <Image source={require('./../../images/portfolio1.jpg')}
-                            style={{
-                                height: 100,
-                                width: 100,
-                                borderRadius: 50
-                            }} />
-
-                    </View>
-             
-                    <View style={styles.column}>
-                    <Text style={{fontFamily: "RobotoCondensed-Bold" , color: "white" , fontSize: 22, padding: 10}}>article-{index+1}</Text> 
-                        <Text style={{color: "white" , fontSize: 16, padding: 10}}>Posted: {index+1} day ago</Text> 
+                    return (
+                        <View key={index} style={{ backgroundColor: "#f4521e", margin: 15, marginTop: 100, padding: 35, borderRadius: 30, height: 200 }}>
 
 
-                    </View>
-                </View>
-                    </View>
-                )
+
+                            <View style={styles.container}>
+                                <View style={styles.column}>
+                                    <Image source={{
+                                        uri: item.images[0],
+                                    }}
+                                        style={{
+                                            height: 100,
+                                            width: 100,
+                                            borderRadius: 50
+                                        }} />
+                                    {/* <Image source={require('./../../images/portfolio1.jpg')}
+                                        style={{
+                                            height: 100,
+                                            width: 100,
+                                            borderRadius: 50
+                                        }} /> */}
+
+                                </View>
+
+                                <View style={styles.column}>
+                                    {/* <Text style={{fontFamily: "RobotoCondensed-Bold" , color: "white" , fontSize: 22, padding: 10}}>article-{index+1}</Text> 
+                        <Text style={{color: "white" , fontSize: 16, padding: 10}}>Posted: {index+1} day ago</Text>  */}
+                                    <Text> {item.title} </Text>
+
+                                </View>
+                            </View>
+                        </View>
+                    )
                 })}
             </Dashboard>
         </View>
@@ -83,6 +106,6 @@ const styles = StyleSheet.create({
         flex: 1, // Each column takes up equal space
 
         padding: 16, // Optional: Add padding for content spacing
-        
+
     },
 });

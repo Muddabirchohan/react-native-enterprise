@@ -1,10 +1,13 @@
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import Dashboard from '../../layout/dashboard';
 import { stylesRoboto } from '../../styles/styles';
+import { Button, ButtonGroup, withTheme, Text } from '@rneui/themed';
+
+
 
 const { useNavigation } = require('@react-navigation/native');
 
-export default function HomeScreen() {
+function HomeScreen() {
 
     const navigation = useNavigation()
 
@@ -12,16 +15,21 @@ export default function HomeScreen() {
         // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <View>
             {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> */}
-            <Dashboard>
-                <View style={styles.container}>
+            <Dashboard >
+
+
+                <View>
                     <View style={styles.column1}>
-                        <Image source={require('./../../images/portfolio1.jpg')}
+
+                        <Image source={require('./../../images/poet.jpg')}
                             style={{
-                                flex: 1,
-                                width: 330,
-                                height: 450,
-                                resizeMode: 'contain'
+
+                                width: 350,
+                                height: 350,
+                                resizeMode: 'contain',
+
                             }} />
+
                     </View>
 
 
@@ -29,36 +37,19 @@ export default function HomeScreen() {
 
                 </View>
 
-                {/* <View style={styles.container}>
-                    <View style={styles.column}>
-                        <Image source={require('./../../images/portfolio2.jpg')}
-                            style={{ width: 80 }} />
-
-                    </View>
-                    <View style={styles.column}>
-                        <Text style={{ fontFamily: "RobotoCondensed-Bold", color: "white", fontSize: 18 }}>
-                            PORTFOLIO - CHOHAN
-                        </Text>
-                    </View>
-                    <View style={styles.column}>
-                        <Image source={require('./../../images/portfolio2.jpg')}
-                            style={{ width: 80 }} />
-
-                    </View>
-                </View> */}
 
 
-                <View style={{
-                display: "flex",
-                margin: 20
-                // marginTop: 260
-            }}>
+                <View
+                    style={styles.column2}
+                >
 
-                <Button
-                    title="Proceed to article(s)"
-                    color="#f4511e"
-                    onPress={() => navigation.navigate('ListScreen')} />
-            </View>
+
+                    <Text style={styles.text}> Personalize your poetic journey, share your masterpieces, and explore the beauty of language in a seamless, visually appealing interface. Join us in celebrating the art of words – where every line tells a story and every poem paints a picture. Your literary adventure begins here. </Text>
+
+                </View>
+
+                <Button size="lg" color="#002244" onPress={() => navigation.navigate('ListCategories')}>View</Button>
+
 
             </Dashboard>
 
@@ -68,20 +59,33 @@ export default function HomeScreen() {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row', // This sets the layout to a row
-        justifyContent: 'space-between', // Adjust as needed (space-between, space-around, etc.)
-        paddingHorizontal: 16, // Optional: Add padding for spacing
-    },
-    column: {
-        flex: 1, // Each column takes up equal space
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 16, // Optional: Add padding for content spacing
-    },
+
     column1: {
         flex: 1, // Each column takes up equal space
 
-        padding: 16, // Optional: Add padding for content spacing
+        height: 300,
+        justifyContent: "center",
+        alignItems: "center"
+        // padding: 16, // Optional: Add padding for content spacing
     },
+    column2: {
+        borderTopStartRadius: 150,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#002D62",
+        textAlign: "center",
+        height: 360,
+        padding: 30
+
+    },
+    text: {
+        color: "white",
+        fontSize: 16,
+        // fontFamily: "Roboto",
+        textAlign: "center"
+    }
 });
+
+
+export default withTheme(HomeScreen, '');

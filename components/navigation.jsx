@@ -3,6 +3,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Home/home';
 import ListScreen from './Detail/detail';
+import ListCategories from './Categories/categories';
 
 export default function NavigationCustom() {
 
@@ -17,6 +18,16 @@ export default function NavigationCustom() {
                     title: 'List Article(s)',
                     headerStyle: {
                         backgroundColor: '#f4511e',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }} />
+                   <Stack.Screen name="ListCategories" component={ListCategories} options={{
+                    title: 'List Categories(s)',
+                    headerStyle: {
+                        backgroundColor: '#003153',
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {
