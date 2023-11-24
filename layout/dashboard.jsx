@@ -30,7 +30,7 @@ export default Dashboard
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#003153',
+    // backgroundColor: '#fff',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
