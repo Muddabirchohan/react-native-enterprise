@@ -5,6 +5,7 @@ import HomeScreen from './Home/home';
 import ListScreen from './Detail/detail';
 import ListCategories from './Categories/categories';
 import ArticleInCategory from './Articles/article';
+import ArticleSingle from './Articles/articleSingle';
 
 export default function NavigationCustom() {
 
@@ -25,7 +26,7 @@ export default function NavigationCustom() {
                         fontWeight: 'bold',
                     },
                 }} />
-                   <Stack.Screen name="ListCategories" component={ListCategories} options={{
+                <Stack.Screen name="ListCategories" component={ListCategories} options={{
                     title: 'List Categories(s)',
                     headerStyle: {
                         backgroundColor: '#003153',
@@ -35,8 +36,19 @@ export default function NavigationCustom() {
                         fontWeight: 'bold',
                     },
                 }} />
-    <Stack.Screen name="ArticleInCategories" component={ArticleInCategory} options={{
+                <Stack.Screen name="ArticleInCategories" component={ArticleInCategory} options={{
                     title: 'Article(s)',
+                    headerStyle: {
+                        backgroundColor: '#003153',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }} />
+
+                <Stack.Screen name="ArticleSingle" component={ArticleSingle} options={{
+                    title: 'Detail',
                     headerStyle: {
                         backgroundColor: '#003153',
                     },

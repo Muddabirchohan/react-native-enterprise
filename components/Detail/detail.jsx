@@ -10,6 +10,8 @@ export default function ListScreen() {
 
     const navigation = useNavigation()
 
+    
+
     const [loader, showLoader] = useState(false)
     const [articles, setArticles] = useState([])
 
@@ -21,11 +23,12 @@ export default function ListScreen() {
             redirect: 'follow'
         };
 
-        fetch("http://192.168.0.105:3001/articles/all", requestOptions)
+        fetch("http://192.168.0.107:3001/articles/all", requestOptions)
             .then(response => response.json())
             .then(result => setArticles(result))
-            .catch(error => console.log('error', error));
+            .finally( showLoader(false))
 
+            .catch(error => console.log('error', error));
     }, [])
 
 
@@ -71,7 +74,7 @@ export default function ListScreen() {
                                 <View style={styles.column}>
                                     {/* <Text style={{fontFamily: "RobotoCondensed-Bold" , color: "white" , fontSize: 22, padding: 10}}>article-{index+1}</Text> 
                         <Text style={{color: "white" , fontSize: 16, padding: 10}}>Posted: {index+1} day ago</Text>  */}
-                                    <Text> {item.title} </Text>
+                                    <Text> {item.title}  ssss</Text>
 
                                 </View>
                             </View>

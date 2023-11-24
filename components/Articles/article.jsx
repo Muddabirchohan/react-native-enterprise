@@ -11,10 +11,6 @@ export default function ArticleInCategory({ route }) {
 
     const { category } = route.params;
 
-
-
-    // console.log("categoryzzz",`http://192.168.0.105:3001/articles/category/${category.toLowerCase()}`)
-
     const navigation = useNavigation()
 
     const [loader, showLoader] = useState(true)
@@ -28,19 +24,29 @@ export default function ArticleInCategory({ route }) {
             redirect: 'follow'
         };
 
-        fetch(`http://192.168.0.105:3001/articles/category/${category.toLowerCase()}`, requestOptions)
+        fetch(`http://192.168.0.107:3001/articles/category/${category.toLowerCase()}`, requestOptions)
             .then(response => response.json())
             .then(result => setArticles(result))
-            .finally(showLoader(false))
+        .finally(showLoader(false))
             .catch(error => console.log('error', error));
 
     }, [category])
 
-    if (loader) return (
-        <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
+    const gotoSingleArticle = (category) => {
+
+        navigation.navigate('ArticleSingle',{ category })
+    }
+
+
+  
+
+
+    if (loader) return (<View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
             <ActivityIndicator size="medium" color="#0000ff" />
         </View>
     )
+
+   
 
     return (
         <View style={styles.categories}>
@@ -51,8 +57,8 @@ export default function ArticleInCategory({ route }) {
 
                     return (
                         <Card>
-                            <View style={styles.container}>
-                                <Text>{item?.title}</Text>
+                            <View style={styles.container}  >
+                                <Text onPress={() => gotoSingleArticle(item)} >{item?.title}</Text>
                             </View>
                         </Card>
                     )
